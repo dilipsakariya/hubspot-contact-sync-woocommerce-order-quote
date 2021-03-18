@@ -8,7 +8,7 @@
  * Plugin Name:       Hubspot Contact Sync - Woocommerce Order Quote
  * Plugin URI:        https://ducksoupdigital.co.uk/
  * Description:       WooCommerce Sync Contacts and Order or Quote info into Hubspot account using v2 api of hubspot
- * Version:           1.0.0
+ * Version:           3.0.0
  * Author:            DuckSoup Digital 
  * Author URI:        https://ducksoupdigital.co.uk/
  * Text Domain:       hubspot_contact_sync_woocommerce_order_quote
@@ -58,16 +58,16 @@ function hubspot_sync_order_contacts( $order_id ) {
 	 // The Order data
 
 	$order_billing_first_name = $order_data['billing']['first_name'];
-	$order_billing_last_name = $order_data['billing']['last_name'];
-	$order_billing_company = $order_data['billing']['company'];
-	$order_billing_address_1 = $order_data['billing']['address_1'];
-	$order_billing_address_2 = $order_data['billing']['address_2'];
-	$order_billing_city = $order_data['billing']['city'];
-	$order_billing_state = $order_data['billing']['state'];
-	$order_billing_postcode = $order_data['billing']['postcode'];
-	$order_billing_country = $order_data['billing']['country'];
-	$order_billing_email = $order_data['billing']['email'];
-	$order_billing_phone = $order_data['billing']['phone'];
+  $order_billing_last_name = $order_data['billing']['last_name'];
+  $order_billing_company = $order_data['billing']['company'];
+  $order_billing_address_1 = $order_data['billing']['address_1'];
+  $order_billing_address_2 = $order_data['billing']['address_2'];
+  $order_billing_city = isset($order->get_billing_city())?$order->get_billing_city():$order_data['billing']['city'];
+  $order_billing_state = $order_data['billing']['state'];
+  $order_billing_postcode = $order_data['billing']['postcode'];
+  $order_billing_country = isset($order->get_billing_country())?$order->get_billing_country():$order_data['billing']['country'];
+  $order_billing_email = $order_data['billing']['email'];
+  $order_billing_phone = $order_data['billing']['phone'];
 	
 	$order_total = $order_data['total'];
 	$order_detail = '';
@@ -119,6 +119,7 @@ function hubspot_sync_order_contacts( $order_id ) {
       'vat' => $order_vat,
       'order_total' => $order_total,
       'order_detail' => $order_detail,
+      'operating_company_pel' => 'true',
       'hs_context' => json_encode($hs_context)
     );
 
