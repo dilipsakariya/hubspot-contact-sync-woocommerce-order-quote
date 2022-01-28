@@ -8,13 +8,13 @@
  * Plugin Name:       Hubspot Contact Sync - Woocommerce Order Quote
  * Plugin URI:        https://ducksoupdigital.co.uk/
  * Description:       WooCommerce Sync Contacts and Order or Quote info into Hubspot account using v2 api of hubspot
- * Version:           8.0.0
+ * Version:           9.0.0
  * Author:            DuckSoup Digital 
  * Author URI:        https://ducksoupdigital.co.uk/
  * Text Domain:       hubspot_contact_sync_woocommerce_order_quote
  * Domain Path:       /languages
  * Requires at least:   4.3
- * Tested up to:        5.6.1
+ * Tested up to:        5.9
  *
  * @author          https://ducksoupdigital.co.uk
  * @copyright       All rights reserved Copyright (c) 2021, https://ducksoupdigital.co.uk
@@ -104,7 +104,7 @@ function hubspot_sync_order_contacts( $order_id ) {
       $quantity     = $item->get_quantity(); 
       $product_price  = $product->get_price();
 
-      $order_detail .= $count.') '. $item_name .' (#'.$product_id.')'. PHP_EOL;
+      $order_detail .= $count.') '. $item_name .' (#'.$product_id.')'. ' x '. $quantity . PHP_EOL;
       $count++;
   endforeach;
 
